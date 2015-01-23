@@ -52,12 +52,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\fgvzla\Documents\Visual Studio 2012\Opengl\glew-1.7.0\include;C:\Users\fgvzla\Documents\Visual Studio 2012\Opengl\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\Opengl\freeglut\include;C:\dev\Opengl\glew-1.7.0\include;C:\Users\fgvzla\Documents\Visual Studio 2012\Opengl\glew-1.7.0\include;C:\Users\fgvzla\Documents\Visual Studio 2012\Opengl\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\fgvzla\Documents\Visual Studio 2012\Opengl\glew-1.7.0\lib;C:\Users\fgvzla\Documents\Visual Studio 2012\Opengl\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\dev\Opengl\glew-1.7.0\lib;C:\dev\Opengl\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

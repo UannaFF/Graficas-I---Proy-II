@@ -32,21 +32,18 @@ void initGame(){
 	float enemiesX2[6] = {-0.6f, -0.45f, -0.3f, -0.15f, 0.0f, 0.15f};
 	float enemiesY[5] = {0.3f, 0.4f, 0.5f, 0.6f, 0.7f};
 	int health = 0;
-	for (int i = 0; i < 5; i++)
-	{
+	for (int i = 0; i < 5; i++){
 		//Si es linea impar se utilizan las primeras coordenadas. Caso contrario se utilizan
 		//las segundas
 		int x_elegir = (int) (i % 2);
-		for (int j = 0; j < 7; j++)
-		{
+		for (int j = 0; j < 7; j++){
 			if ((rand() % 100) > 20)
 				health = 1;
 			else
 				health = 2;
 			if (x_elegir == 1){
 				enemies.emplace_front(enemiesX1[j], enemiesY[i], health);
-			}
-			else{
+			}else{
 				if (j>5)
 					break;
 				enemies.emplace_front(enemiesX2[j], enemiesY[i], health);
@@ -82,7 +79,7 @@ void initGame(){
 	}
 }
 
-//funcion de reshape
+//Funcion de reshape
 void changeViewport(int w, int h) {
 	float aspectratio;
 	glViewport(0, 0, w, h);
@@ -96,11 +93,10 @@ void changeViewport(int w, int h) {
 		glOrtho(-1.0*aspectratio, 1.0*aspectratio, -1.0, 1.0, 1.0, 10.0);
 	}
 	glMatrixMode(GL_MODELVIEW);
-	
 }
 
-void printw (float x, float y, float z, char* format, ...)
-{
+//Funcion para imprimir strings en pantalla
+void printw (float x, float y, float z, char* format, ...){
     va_list args;   //  Variable argument list
     int len;        // String length
     int i;          //  Iterator
@@ -137,17 +133,11 @@ void printw (float x, float y, float z, char* format, ...)
  void ejesCoordenada(float limite) {
 	glLineWidth(2.5);
 	glBegin(GL_LINES);
-
 		glColor3f(1.0,0.0,0.0);
-
 		glVertex2f(0,limite);
-
 		glVertex2f(0,-limite);
-
 		glColor3f(0.0,0.0,1.0);
-
 		glVertex2f(limite,0);
-
 		glVertex2f(-limite,0);
 	glEnd();
 	glLineWidth(1.5);
@@ -157,21 +147,14 @@ void printw (float x, float y, float z, char* format, ...)
 		for(i = -limite; i <=limite; i++){
 			if (i!=0) {	
 				if ((i%2)==0){	
-
 					glVertex2f(i,0.4);
-
 					glVertex2f(i,-0.4);
-
 					glVertex2f(0.4,i);
-
 					glVertex2f(-0.4,i);
 				}else{
 					glVertex2f(i,0.2);
-
 					glVertex2f(i,-0.2);
-
 					glVertex2f(0.2,i);
-
 					glVertex2f(-0.2,i);
 				}
 			}
@@ -184,8 +167,7 @@ void printw (float x, float y, float z, char* format, ...)
 void displayCircle(float cx, float cy, float r, int segments) {
 	//glColor3f( 255.0f, 255.0f, 255.0f );
 	glBegin(GL_LINE_LOOP);
-	for(int ii = 0; ii < segments; ii++) 
-	{ 
+	for(int ii = 0; ii < segments; ii++) { 
 		float theta = 2.0f * 3.1415926f * float(ii) / float(segments);
 		float x = r * cosf(theta);
 		float y = r * sinf(theta); 
@@ -198,8 +180,7 @@ void displayCircle(float cx, float cy, float r, int segments) {
 void drawHalfCircle(float cx, float cy, float r, int segments) {
 	//glColor3f( 255.0f, 255.0f, 255.0f );
 	glBegin(GL_TRIANGLE_FAN);
-	for(int ii = 0; ii < segments; ii++) 
-	{ 
+	for(int ii = 0; ii < segments; ii++){ 
 		float theta = (0.5)*3.1415926f * float(ii) / float(segments);
 		float x = r * cosf(theta);
 		float y = r * sinf(theta); 
@@ -212,8 +193,7 @@ void drawHalfCircle(float cx, float cy, float r, int segments) {
 void drawFilledCircle(float cx, float cy, float r, int segments) {
 	//glColor3f( 255.0f, 255.0f, 255.0f );
 	glBegin(GL_TRIANGLE_FAN);
-	for(int ii = 0; ii < segments; ii++) 
-	{ 
+	for(int ii = 0; ii < segments; ii++){ 
 		float theta = 2.0f * 3.1415926f * float(ii) / float(segments);
 		float x = r * cosf(theta);
 		float y = r * sinf(theta); 
@@ -226,16 +206,14 @@ void drawFilledCircle(float cx, float cy, float r, int segments) {
 void displayStrapCircle(float cx, float cy, float r, int segments) {
 	//glColor3f( 255.0f, 255.0f, 255.0f );
 	glBegin(GL_LINE_LOOP);
-	for(int ii = 0; ii < segments; ii++) 
-	{ 
+	for(int ii = 0; ii < segments; ii++){ 
 		float theta = 2.0f * 3.1415926f * float(ii) / float(segments);
 		float x = r * cosf(theta);
 		float y = r * sinf(theta); 
 		glVertex2f(x + cx, y + cy);
 	} 
 	glEnd(); 
-	for(int ii = 0; ii < segments; ii++) 
-	{ 
+	for(int ii = 0; ii < segments; ii++){ 
 		float theta = 2.0f * 3.1415926f * float(ii) / float(segments);
 		float x = r * cosf(theta);
 		float y = r * sinf(theta); 
@@ -361,35 +339,35 @@ void drawCircle(float cx, float cy, float r, int segments) {
 	glEnd(); 
 }
 
-
-void drawOvni() {
+//Funcion para dibujar el enemigo superior
+void drawOvni(){
 	glPushMatrix();
-		drawFilledCircle(0.0f, 0.0f, 0.075f, 10);
-		glColor3f(0.0f, 0.0f, 0.0f);
-		drawFilledCircle(0.0f, 0.035f, 0.08f, 10);
-		glColor3f(1.0f, 1.0f, 1.0f);
-		drawHalfCircle(0.0f, 0.02f, 0.05f, 10);
-		drawCircle(0.0f, 0.015, 0.06,10);
+		drawFilledCircle(0.0f,0.0f,0.075f,10);
+		glColor3f(0.0f,0.0f,0.0f);
+		drawFilledCircle(0.0f,0.035f,0.08f,10);
+		glColor3f(1.0f,1.0f,1.0f);
+		drawHalfCircle(0.0f,0.02f,0.05f,10);
+		drawCircle(0.0f,0.015f,0.06f,10);
 		glPushMatrix();
-			glColor3f(1.0f, 1.0f, 1.0f);
-			glTranslatef(0.05f, -0.06f, 0.0f);
+			glColor3f(1.0f,1.0f,1.0f);
+			glTranslatef(0.05f,-0.06f,0.0f);
 			glRotatef(-45.0f,0.0f,0.0f,1.0f);
-			drawFloor(-0.03, 0.03, 0.0);
+			drawFloor(-0.03f,0.03f,0.0);
 		glPopMatrix();
 		glPushMatrix();
-			glColor3f(1.0f, 1.0f, 1.0f);
-			glTranslatef(-0.05f, -0.06f, 0.0f);
+			glColor3f(1.0f,1.0f,1.0f);
+			glTranslatef(-0.05f,-0.06f,0.0f);
 			glRotatef(45.0f,0.0f,0.0f,1.0f);
-			drawFloor(-0.03, 0.03, 0.0);
+			drawFloor(-0.03f,0.03f,0.0);
 		glPopMatrix();
 		glPushMatrix();
-			glTranslatef(-0.07f, -0.06f, 0.0f);
-			glScalef(0.1f, 0.3f, 1.0f);
+			glTranslatef(-0.07f,-0.06f,0.0f);
+			glScalef(0.1f,0.3f,1.0f);
 			drawFilledSquare();
 		glPopMatrix();
 		glPushMatrix();
-			glTranslatef(0.07f, -0.06f, 0.0f);
-			glScalef(0.1f, 0.3f, 1.0f);
+			glTranslatef(0.07f,-0.06f,0.0f);
+			glScalef(0.1f,0.3f,1.0f);
 			drawFilledSquare();
 		glPopMatrix();
 	glPopMatrix();
@@ -414,7 +392,7 @@ void drawRectangle(float sizey, float sizex) {
 	glEnd();
 }
 
-
+//Funcion para mover el ovni
 void moveOvniFunc(int value){
 	moveOvni += 0.007;
 	//si se tiene que mover mas llama al timer de nuevo.
@@ -425,9 +403,9 @@ void moveOvniFunc(int value){
 	}
 }
 
+//Funcion para mover los enemigos
 void moveEnemies(int f){
-	if (playing)
-	{
+	if (playing){
 		int floor = f;
 		bool temp_collition = wall_collition;
 		wall_collition = false;
@@ -476,11 +454,10 @@ void moveEnemies(int f){
 	}
 }
 
-
+//Funcion para disparar
 void moverBalitasPlayer() {
 	float xEn = 0.0f, yEn = 0.0f;
-	if (playing)
-	{
+	if (playing){
 		for (list<pair<float,float>>::iterator it=balitasPlayer.begin(); it != balitasPlayer.end(); ){
 			int erase = false;
 			(it->second) += 0.05;
@@ -506,14 +483,18 @@ void moverBalitasPlayer() {
 					}
 				}
 			}
-			if (!playing)
-			{
+			if (!playing){
 				enemies.clear();
 				balitasEnemy.clear();
 				balitasPlayer.clear();
 				defenses.clear();
 				break;
 			}
+			//Colision con ovni
+			/*
+			Faltaaaaa!!! Si, si, si. Mambo mambo mambo (8)!
+			*/
+
 			//Colisiones con barrera
 			for(list<Objeto>::iterator itDef=defenses.begin(); itDef != defenses.end(); ++itDef) {
 				xEn = itDef->getX();
@@ -522,13 +503,13 @@ void moverBalitasPlayer() {
 				if(yEn-0.033 <= (it->second) && (it->second) <= yEn+0.033) {
 					if(xEn-0.055 <= (it->first) && (it->first) <= xEn+0.055) {
 						defenses.erase(itDef);
-						score -= 35;
+						score -= 30;
 						erase = true;
 						break;
 					}
 				}
 			}
-
+			
 			//Colisiones con balas enemigas
 			for(list<pair<float,float>>::iterator itDef=balitasEnemy.begin(); itDef != balitasEnemy.end(); ++itDef) {
 				xEn = itDef->first;
@@ -542,6 +523,7 @@ void moverBalitasPlayer() {
 					}
 				}
 			}
+
 
 			if(erase || it->second >= 1.0f) {
 				if(balitasPlayer.size() == 1) {
@@ -615,6 +597,7 @@ void refresh(int value) {
 	glutTimerFunc(17,refresh,0);
 }
 
+//Funcion para hacer aparecer el ovni
 void refreshOvni(int value) {
 	ovni = true;
 
@@ -624,37 +607,41 @@ void refreshOvni(int value) {
 	glutTimerFunc(7000,refreshOvni,3);
 }
 
+//Funcion para las balas
 void refreshFuncBalitas(int value) {
-	if (playing)
-	{
+	if (playing){
 		moverBalitasPlayer();
 		moverBalitasEnemies();
 		glutTimerFunc(17, refreshFuncBalitas, 1);
 	}
 }
 
+//Funcion para refrescar el color
 void refreshColor(int value) {
-	if (playing)
-	{
+	if (playing){
 		color = !color;
 		glutTimerFunc(500,refreshColor,2);
 	}
 }
 
-
+//Funcion para dar permiso de disparo a nave del jugador
 void setFlagCanThrow(int value) {
 	flagThrow = 1;
 }
 
 //Funcion que se encarga de las acciones de las teclas especiales, las flechas.
 void specialKeyPressed (int key, int x, int y) {
-	cout << moveShip << endl;
+	//cout << moveShip << endl;
 	switch ( key ) {
-		case GLUT_KEY_LEFT : 
-			moveShip -= 0.05;
+		case GLUT_KEY_LEFT :
+			if(moveShip >= -0.85){
+				moveShip -= 0.05;
+			}
 			break;
-		case GLUT_KEY_RIGHT : 
-			moveShip += 0.05;
+		case GLUT_KEY_RIGHT :
+			if(moveShip <= 0.85){
+				moveShip += 0.05;
+			}
 			break;
 		default :
 			break;
@@ -705,6 +692,7 @@ void drawParalele() {
 	glEnd();
 }
 
+//Funcion para dibujar el fuego de la nave
 void drawFire() {
 	glBegin(GL_QUADS);
 		if(color) glColor3f(1.0f, 0.0f, 0.0f);
@@ -740,14 +728,15 @@ void drawFire() {
 	glEnd();
 }
 
+//Funcion de render
 void render(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	gluLookAt(0.0,0.0,5.0,0.0,0.0,0.0,0.0,1.0,0.0);
+
 	//Dibuja la base
-	if (playing)
-	{
-		if(ovni) {
+	if (playing){
+		if(ovni){
 			glPushMatrix();
 			glTranslatef(moveOvni, 0.85f, 0.0f);
 				glColor3f(255.0f, 255.0f, 255.0f);
@@ -759,9 +748,8 @@ void render(){
 			glColor3f(0.0f, 0.0f, 255.0f);
 			drawRectangle(1.9f, 1.9f);
 			glColor3f(0.0f, 255.0f, 255.0f);
-			//ejesCoordenada(1.0f);
 
-			//Dibujando la nave especial
+			//Dibujando la nave espacial
 			glPushMatrix();
 				glTranslatef(moveShip,-0.83f,0.0f);
 				glPushMatrix();
@@ -771,7 +759,6 @@ void render(){
 						glLineWidth(1.0f);
 						glTranslatef(-0.055f,0.0f,0.0f);
 						glRotatef(-20.0f,0.0f,0.0f,1.0f);
-				
 						drawHalfCircle(0.0f, 0.0f, 0.1, 5);		
 					glPopMatrix();
 					glPushMatrix();
@@ -801,8 +788,6 @@ void render(){
 						glRotatef(110.0f,0.0f,0.0f,1.0f);
 						drawFloor(-0.03, 0.03, 0.0);
 					glPopMatrix();
-			
-
 					glPushMatrix();
 						glTranslatef(0.0f,-0.07f,0.0f);
 						drawParalele();
@@ -810,7 +795,6 @@ void render(){
 				glPopMatrix();
 				if(color){
 					glPushMatrix();
-
 						glTranslatef(0.0f,-0.06f,0.0f);
 						glRotatef(180.0f,0.0f,0.0f,1.0f);
 						glScalef(0.5f, 0.5f, 1.0f);
@@ -819,12 +803,6 @@ void render(){
 				}
 
 			glPopMatrix();
-			//Nave jugador
-			/*glPushMatrix();
-				glTranslatef(moveShip,-0.85f,0.0f);
-				glScalef(0.8f,0.8f,0.8f);
-				drawShip();
-			glPopMatrix();*/
 
 			//Se encarga de dibujar todas las balitasPlayer que hay en el momento
 			glPushMatrix();
@@ -849,7 +827,6 @@ void render(){
 				}
 			glPopMatrix();
 
-
 			//Enemigos
 			glLineWidth(1.0f);
 			glPushMatrix();
@@ -862,7 +839,6 @@ void render(){
 					it->drawEnemy();
 				}
 			glPopMatrix();
-			//drawHalfCircle(0.1f, 0.1f, 0.1f, 20);
 		glPopMatrix();
 
 		//Print del score
@@ -881,7 +857,6 @@ void render(){
 			printw(-0.4f, -0.3f, 0.0f, "Score: %d", score, "text");
 		glPopMatrix();
 	}
-
 	glutSwapBuffers();
 }
 
@@ -890,8 +865,8 @@ int main (int argc, char** argv) {
 	srand ( time(NULL) );
 	// Inicialización GLUT
 	glutInit(&argc, argv);
+
 	//Funcion para refrescar cada cierto tiempo
-	
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowSize(600,600);
 	glutCreateWindow("Space Invaders");
